@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct XWeatherApp: App {
+    private let appBuilder = AppBuilder()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView(viewModel: appBuilder.makeWeatherViewModel())
+                .foregroundStyle(.white)
         }
     }
 }
