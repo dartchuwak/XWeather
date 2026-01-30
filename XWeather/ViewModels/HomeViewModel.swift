@@ -26,7 +26,7 @@ final class HomeViewModel: ObservableObject {
         self.loadWeatherUseCase = loadWeatherUseCase
     }
     
-    func loadWeather() async {
+   private func loadWeather() async {
         await run(mode: .initial)
     }
     
