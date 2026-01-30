@@ -15,7 +15,7 @@ struct HourForecastCellView: View {
                 .font(.title)
                 .symbolVariant(.fill)
                 .symbolRenderingMode(.multicolor)
-            Text(forecast.time)
+            Text(forecast.timeString)
                 .font(.subheadline)
             Text(forecast.temperature)
                 .font(.title3)
@@ -25,9 +25,4 @@ struct HourForecastCellView: View {
         .background(Color("cell"))
         .cornerRadius(15)
     }
-}
-
-#Preview {
-    HourForecastCellView(forecast: HourForecast())
-        .foregroundStyle(.white)
 }

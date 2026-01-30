@@ -7,13 +7,13 @@
 
 import Foundation
 import CoreLocation
-import MapKit
 
-protocol GeocoderServiceProtocol {
+protocol GeocoderServiceProtocol: Sendable {
     func convert(from location: CLLocation) async throws -> String
+    func convert(from place: String) async throws -> CLLocationCoordinate2D?
 }
 
-final class GeocoderService: GeocoderServiceProtocol {
+struct GeocoderService: GeocoderServiceProtocol {
     
     private let coder = CLGeocoder()
     
@@ -23,5 +23,11 @@ final class GeocoderService: GeocoderServiceProtocol {
         let city = place?.administrativeArea ?? "Unknown City"
         WidgetStore.savePlace(name: city, lat: location.coordinate.latitude, lon: location.coordinate.longitude)
         return city
+    }
+    
+    func convert(from place: String) async throws -> CLLocationCoordinate2D? {
+        let request = try await coder.geocodeAddressString(place, in: nil)
+        let location = request.first?.location
+        return location?.coordinate
     }
 }

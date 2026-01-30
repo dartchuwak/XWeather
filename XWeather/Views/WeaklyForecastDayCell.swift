@@ -61,7 +61,7 @@ struct WeaklyForecastDayCell: View {
     }
 }
 
-#Preview {
-    WeaklyForecastDayCell(forecast: DailyForecast(day: "Воскресенье", hight: "+4", low: "-1"))
-        .padding(.horizontal)
-}
+//#Preview {
+//    WeaklyForecastDayCell(forecast: DailyForecast(day: "Воскресенье", high: "+4", low: "-1"))
+//        .padding(.horizontal)
+//}

@@ -11,6 +11,7 @@ import MapKit
 protocol LocationServiceProtocol {
     func requestPermission()
     func requestLocation() async throws -> CLLocation
+    func searchLocation()
 }
 
 final class LocationService: NSObject, LocationServiceProtocol {
@@ -27,6 +28,9 @@ final class LocationService: NSObject, LocationServiceProtocol {
         manager.requestWhenInUseAuthorization()
     }
     
+    func searchLocation() {
+    
+    }
     
     func requestLocation() async throws -> CLLocation {
         let status = manager.authorizationStatus

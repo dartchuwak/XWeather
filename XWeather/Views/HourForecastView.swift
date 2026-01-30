@@ -20,17 +20,3 @@ struct HourForecastView: View {
         }
     }
 }
-
-#Preview {
-    HourForecastView(hourForecasts: [HourForecast(),
-                                     HourForecast(),
-                                     HourForecast(),
-                                     HourForecast(),
-                                     HourForecast(),
-                                     HourForecast(),
-                                     HourForecast(),
-                                     HourForecast(),
-                                     HourForecast(),
-                                     HourForecast(),
-                                     HourForecast()])
-}

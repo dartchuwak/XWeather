@@ -70,7 +70,7 @@ struct Provider: TimelineProvider {
         let service = WeatherKitService()
         let location = CLLocation(latitude: lat, longitude: lon)
         guard let forecast = await service.fetchCurrentWeather(for: location) else { return nil }
-        let currentForecast = CurrentForecast(forecast: forecast)
+        let currentForecast = CurrentForecast(temperature: "", condition: "", feelsLike: "", icon: "")
         return currentForecast
     }
 }

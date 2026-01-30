@@ -8,7 +8,5 @@
 import Foundation
 
 enum Route: Hashable {
-    case day(DailyForecast)
-    case settings
-    case home
+    case day(forecast: DailyForecast)
 }

@@ -12,10 +12,11 @@ final class AppBuilder {
     private lazy var locationService: LocationServiceProtocol = LocationService()
     private lazy var weatherKitService: WeatherKitServiceProtocol = WeatherKitService()
     private lazy var geocoder: GeocoderServiceProtocol = GeocoderService()
+    private lazy var autocomplete: PlaceAutocompleteService = PlaceAutocompleteService()
     
     // MARK: - Repository
-    private lazy var weatherRepository: WeatherRepositoryProtocol =
-    WeatherRepository(weatherKitservice: weatherKitService)
+    private lazy var weatherRepository: WeatherKitRepositoryProtocol =
+    WeatherKitRepository(weatherKitservice: weatherKitService)
     
     private lazy var locationRepository: LocationRepositoryProtocol =
     LocationRepostitory(locationService: locationService)
@@ -27,8 +28,13 @@ final class AppBuilder {
                        weatherRepo: weatherRepository,
                        geocoderService: geocoder)
     
+    
     // MARK: - Factory
     func makeWeatherViewModel() -> HomeViewModel {
         HomeViewModel(loadWeatherUseCase: loadWeatherUseCase)
+    }
+    
+    func makeAutocompleteService() -> PlaceAutocompleteService {
+        PlaceAutocompleteService()
     }
 }

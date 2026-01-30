@@ -10,11 +10,10 @@ import CoreLocation
 import WeatherKit
 
 protocol WeatherKitServiceProtocol {
-    func fetchWeather(for location: CLLocation) async throws -> WeatherSnapshot
+    func fetchWeather(for location: CLLocation) async throws -> (current: CurrentWeather, daily: Forecast<DayWeather>, hourly: Forecast<HourWeather>)
 }
 
 final class WeatherKitService: WeatherKitServiceProtocol {
-    
     private let service: WeatherService
     init(service: WeatherService = .shared) {
         self.service = service
@@ -25,16 +24,7 @@ final class WeatherKitService: WeatherKitServiceProtocol {
         return current
     }
     
-    func fetchWeather(for location: CLLocation) async throws -> WeatherSnapshot {
-        let (dailyForecast, currentForecast, hourlyForecast) = try await service.weather(for: location, including: .daily, .current, .hourly)
-        let weakly = Array(dailyForecast.forecast.prefix(7))
-        let current = CurrentForecast(forecast: currentForecast)
-        let daily = DailyForecast(forecast: dailyForecast.forecast.first!)
-        let hourly = Array(hourlyForecast.forecast.filter { $0.date >= Date() }
-            .prefix(13))
-        let snapshot = WeatherSnapshot(current: current, daily: daily, weakly: weakly, hour: hourly)
-        let cached = WidgetStore.CachedWeather(temperature: current.temperature, condition: current.condition, icon: current.icon, updatedAt: Date())
-        WidgetStore.saveCachedWeather(cached)
-        return snapshot
+    func fetchWeather(for location: CLLocation) async throws -> (current: CurrentWeather, daily: Forecast<DayWeather>, hourly: Forecast<HourWeather>) {
+        try await service.weather(for: location, including: .current, .daily, .hourly)
     }
 }

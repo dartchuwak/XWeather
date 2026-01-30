@@ -15,3 +15,15 @@ enum LoadWeatherState: Equatable {
     case failed(String)
     case permissionDenied
 }
+
+extension LoadWeatherState {
+    var isLoading: Bool {
+        if case .loading = self { return true }
+        return false
+    }
+
+    var isUpdating: Bool {
+        if case .updating = self { return true }
+        return false
+    }
+}

@@ -15,11 +15,11 @@ protocol LoadWeatherUseCaseProtocol {
 final class LoadWeatherUseCase: LoadWeatherUseCaseProtocol {
     
     private let locationRepository: LocationRepositoryProtocol
-    private let weatherRepository: WeatherRepositoryProtocol
+    private let weatherRepository: WeatherKitRepositoryProtocol
     private let geocoderService: GeocoderServiceProtocol
     
     init(locationRepo: LocationRepositoryProtocol,
-         weatherRepo: WeatherRepositoryProtocol,
+         weatherRepo: WeatherKitRepositoryProtocol,
          geocoderService: GeocoderServiceProtocol) {
         self.locationRepository = locationRepo
         self.weatherRepository = weatherRepo
@@ -32,8 +32,16 @@ final class LoadWeatherUseCase: LoadWeatherUseCaseProtocol {
     
     func getWeather() async throws -> WeatherScreenModel {
         let location = try await locationRepository.requestOneShotLocation()
-        async let weather = weatherRepository.fetchWeather(for: location)
-        async let place = geocoderService.convert(from: location)
-        return WeatherScreenModel(place: try await place, weather: try await weather)
+        let snapshot = try await weatherRepository.fetchWeather(for: location)
+        let place = try await geocoderService.convert(from: location)
+        
+        let filtered = WeatherSnapshot(
+            current: snapshot.current,
+            weakly: Array(snapshot.weakly.prefix(7)),
+            hour: Array(snapshot.hour.filter{ $0.time >= Date()}.prefix(25))
+        )
+        
+        let screenModel = WeatherScreenModel(place: place, weather: filtered)
+        return screenModel
     }
 }

@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "!!!" : {
+
+    },
     "Day" : {
       "localizations" : {
         "ru" : {
@@ -10,9 +13,6 @@
           }
         }
       }
-    },
-    "Default" : {
-
     },
     "Feels like %@" : {
       "localizations" : {
@@ -609,6 +609,9 @@
           }
         }
       }
+    },
+    "Нет доступа к геолокации" : {
+
     }
   },
   "version" : "1.1"

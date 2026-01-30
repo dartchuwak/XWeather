@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A3227F812F2B6C5C00AA7CFF /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = A3227F802F2B6C5C00AA7CFF /* Lottie */; };
 		A362DD082F00421600F3454D /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A362DCED2F003DAD00F3454D /* WidgetKit.framework */; };
 		A362DD092F00421600F3454D /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A362DCEF2F003DAD00F3454D /* SwiftUI.framework */; };
 		A362DD142F00421700F3454D /* XWeatherWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A362DD072F00421600F3454D /* XWeatherWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -57,6 +58,9 @@
 			membershipExceptions = (
 				Assets.xcassets,
 				Helpers/WeatherHelper.swift,
+				Helpers/WeatherSnapshotMapper.swift,
+				Model/CityModel.swift,
+				Model/OpenMeteoResponse.swift,
 				Model/WeatherSnapshot.swift,
 				Services/WeatherKitService.swift,
 				Widget/WidgetStore.swift,
@@ -89,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3227F812F2B6C5C00AA7CFF /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +160,7 @@
 			);
 			name = XWeather;
 			packageProductDependencies = (
+				A3227F802F2B6C5C00AA7CFF /* Lottie */,
 			);
 			productName = XWeather;
 			productReference = A35FF5B82EFC423600354AEA /* XWeather.app */;
@@ -210,6 +216,9 @@
 			);
 			mainGroup = A35FF5AF2EFC423600354AEA;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A3227F7F2F2B6C5C00AA7CFF /* XCRemoteSwiftPackageReference "lottie-spm" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A35FF5B92EFC423600354AEA /* Products */;
 			projectDirPath = "";
@@ -326,6 +335,8 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -383,6 +394,8 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -570,6 +583,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A3227F7F2F2B6C5C00AA7CFF /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A3227F802F2B6C5C00AA7CFF /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A3227F7F2F2B6C5C00AA7CFF /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A35FF5B02EFC423600354AEA /* Project object */;
 }

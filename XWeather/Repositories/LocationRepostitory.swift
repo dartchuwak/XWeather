@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-protocol LocationRepositoryProtocol {
+protocol LocationRepositoryProtocol: Sendable {
     func requestPermission()
     func requestOneShotLocation() async throws -> CLLocation
 }
